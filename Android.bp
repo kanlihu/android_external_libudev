@@ -1,0 +1,82 @@
+S = "dist/src/libudev"
+
+libudev_common_src_files = [
+    S + "/libudev-device-private.c",
+    S + "/libudev-device.c",
+    S + "/libudev-enumerate.c",
+    S + "/libudev-hwdb.c",
+    S + "/libudev-list.c",
+    S + "/libudev-monitor.c",
+    S + "/libudev-queue-private.c",
+    S + "/libudev-queue.c",
+    S + "/libudev-util.c",
+    S + "/libudev.c",
+    S + "/../shared/conf-files.c",
+    S + "/../shared/dev-setup.c",
+    S + "/../shared/env-util.c",
+    S + "/../shared/fileio.c",
+    S + "/../shared/hashmap.c",
+    S + "/../shared/exit-status.c",
+    S + "/../shared/label.c",
+    S + "/../shared/mkdir.c",
+    S + "/../shared/path-util.c",
+    S + "/../shared/set.c",
+    S + "/../shared/strbuf.c",
+    S + "/../shared/strv.c",
+    S + "/../shared/strxcpyx.c",
+    S + "/../shared/time-util.c",
+    S + "/../shared/utf8.c",
+    S + "/../shared/util.c",
+    "android/glob.c",
+    "android/log.c",
+    "android/missing.c",
+]
+
+libudev_common_c_includes = [
+    "include",
+    "android",
+    "dist/src/shared",
+    "dist/src/systemd",
+]
+
+libudev_common_c_flags = [
+    "-Wno-missing-field-initializers",
+    "-Wno-unknown-attributes",
+    "-std=gnu99",
+    "-Wno-deprecated-declarations",
+    "-Wno-implicit-function-declaration",
+    "-Wno-unused-parameter",
+    "-Wno-incompatible-pointer-types",
+    "-Wno-constant-conversion",
+    "-include " + "android/udev.h",
+]
+
+//## libudev.so
+
+cc_library_shared {
+    name: "libudev",
+
+    srcs: libudev_common_src_files,
+
+    export_include_dirs: libudev_common_c_includes,
+
+    cflags: libudev_common_c_flags,
+
+    shared_libs: [
+		"libcutils",
+		"liblog",
+	],
+}
+
+//## libudev.a
+
+cc_library_static {
+    name: "libudev_static",
+
+    srcs: libudev_common_src_files,
+
+    export_include_dirs: libudev_common_c_includes,
+
+    cflags: libudev_common_c_flags,
+
+}

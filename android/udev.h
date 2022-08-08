@@ -6,6 +6,7 @@
 
 #define FIRMWARE_PATH  "/system/etc/firmware"
 #define UDEVLIBEXECDIR "/system/etc/udev"
+#include <sys/sysmacros.h>
 
 #include <grp.h>
 
@@ -94,7 +95,7 @@ extern char *canonicalize_file_name(const char *path);
 #define nl_langinfo(x) "UTF-8"
 
 /* for open_memstream() */
-#include <cutils/open_memstream.h>
+//#include <cutils/open_memstream.h>
 
 /* missing syscalls */
 #include <sys/syscall.h>

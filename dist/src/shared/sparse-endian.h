@@ -24,6 +24,12 @@
 #include <endian.h>
 #include <stdint.h>
 
+#ifdef __bitwise
+#undef __bitwise
+#endif
+#ifdef __force
+#undef __force
+#endif
 #ifdef __CHECKER__
 #define __bitwise __attribute__((bitwise))
 #define __force __attribute__((force))
